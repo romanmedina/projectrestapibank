@@ -1,48 +1,50 @@
 package pe.com.restapi.serviceimpl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import pe.com.restapi.entity.Person;
-import pe.com.restapi.jparepository.IPersonRepository;
+import pe.com.restapi.repository.IPersonRepository;
 import pe.com.restapi.service.IPersonService;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Service
 public class PersonServiceImpl implements IPersonService{
 
-	@Autowired
-	private IPersonRepository personRepo;
+	@Autowired 
+	IPersonRepository personRepo;
 	
 	@Override
-	public Person add(Person obj) {
-		// TODO Auto-generated method stub
-		return personRepo.save(obj);
+	public Flux<Person> getAll() {
+		return personRepo.findAll();
 	}
 
 	@Override
-	public Person update(Person obj) {
-		// TODO Auto-generated method stub
-		return null;
+	public Mono<Person> create(Person person) {
+		return personRepo.save(person);
 	}
 
 	@Override
-	public List<Person> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public Flux<Person> findById(Integer id) {
+		return personRepo.findAll().filter(x -> x.getIdPerson().equals(id));
+	}
+	
+	@Override
+	public Flux<Person> findByDNI(String dni) {
+		return personRepo.findAll().filter(x -> x.getNumberDoc().equals(dni));
+	}
+	
+	@Override
+	public Mono<Person> update(Person person) {
+		return personRepo.save(person);
 	}
 
 	@Override
-	public Person findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Mono<Void> delete(Person person) {
+		return personRepo.delete(person);
 	}
-
-	@Override
-	public boolean delete(Integer id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
+	
+	
 
 }

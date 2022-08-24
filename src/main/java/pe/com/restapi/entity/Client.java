@@ -1,38 +1,21 @@
 package pe.com.restapi.entity;
 
 import java.time.LocalDateTime;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
+import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Data;
 
 @Data
-@Entity
-@Table(name = "client")
+@Document(collection = "client")
 public class Client {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idClient;
-	@Column(name = "typeClient", nullable = false, length = 30)
 	private String typeClient;
-	@Column(name = "dateEntry")
 	private LocalDateTime dateEntry;
-	@Column(name = "userCreation", nullable = false, length = 30)
 	private String userCreation;
-	@Column(name = "ipCreation", nullable = false, length = 30)
 	private String ipCreation;
-	@ManyToOne
-	@JoinColumn(name = "idPerson", nullable = false, foreignKey = @ForeignKey(name = "fk_client_person"))
-	private Person person;
+	private Integer idPerson;
 	
 	@Override
     public int hashCode() {

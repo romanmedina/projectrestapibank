@@ -2,11 +2,11 @@ package pe.com.restapi.service;
 
 import java.util.List;
 
-public interface ICRUDService<T, V> {
+public interface ICRUDPostgres<T, V> {
 
-	T add(T obj);
+	T create(T obj);
 	T update(T obj);
-	List<T> getAll();
+	List<T> findAll();
 	T findById(V id);
 	boolean delete(V id);
 }

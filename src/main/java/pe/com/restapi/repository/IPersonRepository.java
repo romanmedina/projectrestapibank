@@ -1,15 +1,14 @@
-package pe.com.restapi.jparepository;
-
+package pe.com.restapi.repository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
-
-import pe.com.restapi.mongo.Persona;
+import pe.com.restapi.entity.Person;
 import reactor.core.publisher.Flux;
 
-@Repository
-public interface IPersonaRepository extends ReactiveCrudRepository<Persona, Integer>{
 
-	@Query("{'nombre': ?0}")
-	Flux<Persona> buscaPersona(String dni);
+@Repository
+public interface IPersonRepository extends ReactiveCrudRepository<Person, Integer>{
+
+	@Query("{'phone': ?0}")
+	Flux<Person> findByPhone(String phone);
 }

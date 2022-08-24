@@ -1,29 +1,39 @@
-package pe.com.restapi.entity;
+package pe.com.restapi.entity.postgres;
 
 import java.time.LocalDateTime;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.Table;
 import lombok.Data;
 
-/*
- * Creación de objeto con MongoDB
- * Uso de colección
- */
 @Data
-@Document(collection = "person")
+@Entity
+@Table(name = "person")
 public class Person {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idPerson;
+	@Column(name = "fullName", nullable = false, length = 100)
 	private String fullName;
+	@Column(name = "typeDoc", nullable = false, length = 30)
 	private String typeDoc;
+	@Column(name = "numberDoc", nullable = false, length = 30)
 	private String numberDoc;
+	@Column(name = "dateBirth", nullable = false)
 	private LocalDateTime dateBirth;
+	@Column(name = "email", nullable = false, length = 30)
 	private String email;
+	@Column(name = "phone", nullable = false, length = 30)
 	private String phone;
+	@Column(name = "active", nullable = false)
 	private Boolean active;
+	@Column(name = "userCreation", nullable = false, length = 30)
 	private String userCreation;
+	@Column(name = "ipCreation", nullable = false, length = 30)
 	private String ipCreation;
 	
 	@Override
@@ -50,4 +60,5 @@ public class Person {
             return false;
         return true;
     }
+	
 }
