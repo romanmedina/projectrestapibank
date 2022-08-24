@@ -17,12 +17,14 @@ import lombok.Setter;
 @Setter 
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "movement_fixed")
-public class movement_fixed {
+@Document(collection = "movement")
+public class movement {
 
     @Id
     private Integer idMovementFixed;
-    private Client idFixed;
+    private Integer idCredit;
+    private Integer idFixed;
+    private Integer idSaving;
     private LocalDateTime dateMovement;    
     private String type;    
     private Double interest;    
@@ -45,7 +47,7 @@ public class movement_fixed {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        movement_fixed other = (movement_fixed) obj;
+        movement other = (movement) obj;
         if (idMovementFixed == null) {
             if (other.idMovementFixed != null)
                 return false;
