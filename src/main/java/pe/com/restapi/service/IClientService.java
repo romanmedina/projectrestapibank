@@ -10,5 +10,6 @@ public interface IClientService {
 	Mono<Client> create(Client client);
 	Flux<Client> findById(Integer id);
 	Mono<Client> update(Client client);
+	Mono<Client> save(Client client);
 
 }
