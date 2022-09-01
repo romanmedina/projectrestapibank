@@ -24,6 +24,10 @@ public class AccountSavingImpl implements IAccountSavingService{
 	public Mono<AccountSaving> save(AccountSaving account_saving) {
 		return iIAccountSavingRepository.save(account_saving);
 	}
-
+	
+	@Override
+	public Mono<Void> delete(AccountSaving account_saving) {
+		return iIAccountSavingRepository.delete(account_saving);
+	}
 
 }

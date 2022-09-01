@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.com.restapibank.entity.AccountSaving;
-import pe.com.restapibank.entity.Person;
-import pe.com.restapibank.service.IAccountSavingClientService;
+import pe.com.restapibank.service.IAccountSavingService;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -21,17 +20,16 @@ import reactor.core.publisher.Mono;
 public class AccountSavingController {
 
 	@Autowired
-	private IAccountSavingClientService accountSavingClientService;
-	
-	@GetMapping
-	public Flux<AccountSaving> getById(){
-		return accountSavingClientService.getByIdClientAccount(null);
-	}
+	private IAccountSavingService accountSavingService;
 	
 	@PostMapping
 	public Mono<AccountSaving> save(@RequestBody AccountSaving account_saving){
-		return accountSavingClientService.save(account_saving);
+		return accountSavingService.save(account_saving);
 	}
 	
-	
+    @DeleteMapping("/delete")
+    public ResponseEntity<Mono<Void>> delete(@RequestBody AccountSaving account_saving ){
+    	Mono<Void> p = accountSavingService.delete(account_saving);
+        return new ResponseEntity<Mono<Void>>(p, HttpStatus.NO_CONTENT);
+    }
 }

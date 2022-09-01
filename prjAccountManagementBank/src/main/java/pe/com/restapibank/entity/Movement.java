@@ -18,7 +18,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "movement")
-public class movement {
+public class Movement {
 
     @Id
     private Integer idMovementFixed;
@@ -47,7 +47,7 @@ public class movement {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        movement other = (movement) obj;
+        Movement other = (Movement) obj;
         if (idMovementFixed == null) {
             if (other.idMovementFixed != null)
                 return false;

@@ -8,5 +8,5 @@ public interface IAccountSavingService {
 	
 	Flux<AccountSaving> getAll();
 	Mono<AccountSaving> save(AccountSaving account_saving);
-
+	Mono<Void> delete(AccountSaving account_saving);
 }

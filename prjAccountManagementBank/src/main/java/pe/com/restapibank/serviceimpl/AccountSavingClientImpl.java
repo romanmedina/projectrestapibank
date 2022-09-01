@@ -40,11 +40,6 @@ public class AccountSavingClientImpl implements IAccountSavingClientService{
 	}
 	
 	@Override
-	public Mono<Void> delete(AccountSaving account_saving) {
-		return iIAccountSavingRepository.delete(account_saving);
-	}
-	
-	@Override
 	public Mono<AccountSaving> save(AccountSaving account_saving) {
 		
 		Flux<Client> objCLientData = this.getByIdClient(account_saving.getIdClient());
