@@ -39,7 +39,11 @@ public class AccountSavingClientImpl implements IAccountSavingClientService{
 				.filter(xmg_account_saving-> xmg_account_saving.getIdClient().equals(idClient));
 	}
 	
-
+	@Override
+	public Mono<Void> delete(AccountSaving account_saving) {
+		return iIAccountSavingRepository.delete(account_saving);
+	}
+	
 	@Override
 	public Mono<AccountSaving> save(AccountSaving account_saving) {
 		

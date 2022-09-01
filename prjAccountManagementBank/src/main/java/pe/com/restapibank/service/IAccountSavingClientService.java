@@ -10,5 +10,6 @@ public interface IAccountSavingClientService {
 	Flux<Client> getByIdClient(Integer idClient);
 	Mono<AccountSaving> save(AccountSaving account_saving);
 	Flux<AccountSaving> getByIdClientAccount(Integer idClient);
+	Mono<Void> delete(AccountSaving account_saving);
 
 }
