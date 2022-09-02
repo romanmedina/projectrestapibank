@@ -1,6 +1,5 @@
 package pe.com.restapibank.controller;
 
-import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 import pe.com.restapibank.entity.AccountSaving;
+import pe.com.restapibank.entity.Comission;
 import pe.com.restapibank.entity.Movement;
 import pe.com.restapibank.service.IAccountSavingClientService;
 import pe.com.restapibank.service.IAccountSavingService;
@@ -35,13 +35,7 @@ public class GenerateMovementController {
 	private IMovementService movementService;
 
 	@Autowired
-	private IAccountSavingService accountSavingService;
-
-	@Autowired
 	private IAccountSavingClientService accountSavingClientService;
-	
-	@Autowired
-	private IComissionService comissionService;
 	
 	@GetMapping
 	public ResponseEntity<Flux<Movement>> getAll(){
@@ -93,26 +87,8 @@ public class GenerateMovementController {
     
     // Ahorro: libre de comisión por mantenimiento y con un límite máximo de movimientos mensuales.
 	@PostMapping
-	public ResponseEntity<Mono<Movement>> createMovAccountSaving (@RequestBody Movement Movement){
-		log.info("*****Inicio: Crear Movimiento Ahorros*****");
-		log.info("*************************************************************");
-		Mono<Movement> saving = null;
-		// No busca en la tabla de comision "Libre de comission"
-		// Flux<Comission> objFluxComission = comissionService.findByIdSaving(Movement.getIdSaving());
-		int month = LocalDate.now().getMonthValue();
-		Integer intNumberMovMax = 0;
-		Flux<AccountSaving> objFluxAccountSaving = accountSavingService.findById(Movement.getIdSaving());
-		List<AccountSaving> listAccountSaving = objFluxAccountSaving.collectList().block();
-		for (Iterator<AccountSaving> iterator = listAccountSaving.iterator(); iterator.hasNext();) {
-			AccountSaving accountSaving = (AccountSaving) iterator.next();
-			intNumberMovMax = accountSaving.getNumberMovMonth();
-		}
-		Flux<Movement> objFluxMovement = movementService.findByIdSavingForMonth(Movement.getIdSaving(),month);
-		if (objFluxMovement.count().block().longValue()+1>intNumberMovMax) {
-			log.info("No esta permitido realizar mas movimientos en su cuenta de ahorros");
-		}else{
-			saving = movementService.create(Movement);	
-		}
+	public ResponseEntity<Mono<Movement>> create(@RequestBody Movement movement){
+		Mono<Movement> saving = movementService.create(movement);
 		if (saving==null) {
 			return new ResponseEntity<Mono<Movement>>(saving, HttpStatus.PRECONDITION_FAILED);
 		}else{
@@ -130,7 +106,4 @@ public class GenerateMovementController {
 //		return new ResponseEntity<Mono<Movement>>(p, HttpStatus.CREATED);
 //	}
 	
-
-    
-    	
 }
