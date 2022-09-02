@@ -10,4 +10,6 @@ public interface IAccountSavingService {
 	Mono<AccountSaving> save(AccountSaving account_saving);
 	Mono<Void> delete(AccountSaving account_saving);
 	Flux<AccountSaving> findById(Integer id);
+	
+	Mono<AccountSaving> saveAccSavingByClient(AccountSaving accountSaving);
 }

@@ -38,6 +38,11 @@ public class AccountSavingController {
 	public Mono<AccountSaving> save(@RequestBody AccountSaving account_saving){
 		return accountSavingService.save(account_saving);
 	}
+	
+	@PostMapping("/savingbyclient")
+	public Mono<AccountSaving> saveAccSavingByClient(@RequestBody AccountSaving accountSaving){
+		log.info("*****Inicio: saveAccSavingByClient*****");
+		return accountSavingService.saveAccSavingByClient(accountSaving);
 	    
-    
+	}
 }

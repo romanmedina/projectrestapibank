@@ -11,5 +11,6 @@ public interface IAccountCreditService {
 	Mono<AccountCredit> create(AccountCredit fixed);
 	Mono<Void> delete(AccountCredit fixed);
 	Mono<AccountCredit> depositCredit(AccountCredit fixed);
-	
+	//
+	Mono<AccountCredit> saveAccountCreditByClient(AccountCredit accountCredit);
 }

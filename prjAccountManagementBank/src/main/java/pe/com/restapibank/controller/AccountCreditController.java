@@ -33,5 +33,10 @@ public class AccountCreditController {
 		return accountCreditService.create(account_saving);
 	}
 	    
+	@PostMapping("/creditbyclient")
+	public Mono<AccountCredit> saveAccCreditByClient(@RequestBody AccountCredit accountCredit){
+		log.info("*****Inicio: saveAccSavingByClientPersonnel*****");
+		return accountCreditService.saveAccountCreditByClient(accountCredit);
+	}	
     
 }
