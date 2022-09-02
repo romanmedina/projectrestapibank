@@ -2,6 +2,8 @@ package pe.com.restapibank.serviceimpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import pe.com.restapibank.entity.AccountCredit;
 import pe.com.restapibank.entity.AccountFixed;
 import pe.com.restapibank.repository.IAccountFixedRepository;
 import pe.com.restapibank.service.IAccountFixedService;
@@ -36,6 +38,12 @@ public class AccountFixedServiceImpl implements IAccountFixedService{
 	//Actualiza el saldo y la cantidad de meses de plazo fijo
 	@Override
 	public Mono<AccountFixed> depositFixed(AccountFixed fixed) {
+		// TODO Auto-generated method stub
+		return fixedRepo.save(fixed);
+	}
+
+	@Override
+	public Mono<AccountFixed> retreatFixed(AccountFixed fixed) {
 		// TODO Auto-generated method stub
 		return fixedRepo.save(fixed);
 	}

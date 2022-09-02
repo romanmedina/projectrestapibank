@@ -22,6 +22,7 @@ public class AccountCredit {
 	private Double interestPay;
 	private Integer idClient;
 	private Integer idBank;
+	private Integer numberMovMax;
 	
 	@Override
     public int hashCode() {

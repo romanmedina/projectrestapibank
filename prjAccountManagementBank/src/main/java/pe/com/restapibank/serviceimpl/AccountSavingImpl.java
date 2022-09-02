@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.log4j.Log4j2;
+import pe.com.restapibank.entity.AccountFixed;
 import pe.com.restapibank.entity.AccountSaving;
 import pe.com.restapibank.entity.Client;
 import pe.com.restapibank.repository.IAccountSavingRepository;
@@ -67,4 +68,15 @@ public class AccountSavingImpl implements IAccountSavingService{
 		}	
 	}
 
+	@Override
+	public Mono<AccountSaving> depositFixed(AccountSaving accountSaving) {
+		// TODO Auto-generated method stub
+		return iIAccountSavingRepository.save(accountSaving);
+	}
+
+	@Override
+	public Mono<AccountSaving> retreatFixed(AccountSaving accountSaving) {
+		// TODO Auto-generated method stub
+		return iIAccountSavingRepository.save(accountSaving);
+	}
 }

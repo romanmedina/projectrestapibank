@@ -10,5 +10,6 @@ public interface IAccountFixedService {
 	Flux<AccountFixed> findAccFixedByClient(Integer idClient);
 	Mono<AccountFixed> create(AccountFixed fixed);
 	Mono<AccountFixed> depositFixed(AccountFixed fixed);
+	Mono<AccountFixed> retreatFixed(AccountFixed fixed);
 	
 }

@@ -19,6 +19,7 @@ public class AccountFixed {
 	private String countMonth;
 	private Double interestPay;
 	private Integer idClient;
+	private Integer numberMovMax;
 	
 	@Override
     public int hashCode() {

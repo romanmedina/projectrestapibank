@@ -21,6 +21,8 @@ public class AccountSaving {
 	private Double interest;
 	private Integer idClient;
 	private Integer numberMovMonth;
+	private Integer numberMovMax;
+	private Integer interbankAccount;
 	
 	@Override
     public int hashCode() {
