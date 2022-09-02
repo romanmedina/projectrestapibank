@@ -12,4 +12,6 @@ public interface IAccountSavingService {
 	Flux<AccountSaving> findById(Integer id);
 	
 	Mono<AccountSaving> saveAccSavingByClient(AccountSaving accountSaving);
+	Mono<AccountSaving> saveAccSavingByClientVIP(AccountSaving accountSaving);
+	Mono<AccountSaving> saveAccCurrentBussinessPyme(AccountSaving accountSaving);
 }

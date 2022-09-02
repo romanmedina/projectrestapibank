@@ -1,9 +1,5 @@
 package pe.com.restapibank.controller;
 
-import java.time.LocalDate;
-import java.util.Iterator;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,12 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import lombok.extern.slf4j.Slf4j;
 import pe.com.restapibank.entity.AccountSaving;
-import pe.com.restapibank.entity.Movement;
 import pe.com.restapibank.service.IAccountSavingService;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -65,10 +58,24 @@ public class AccountSavingController {
 		return accountSavingService.save(account_saving);
 	}
 	
-	@PostMapping("/savingbyclient")
+	@PostMapping("/savingpersonal")
 	public Mono<AccountSaving> saveAccSavingByClient(@RequestBody AccountSaving accountSaving){
 		log.info("*****Inicio: saveAccSavingByClient*****");
 		return accountSavingService.saveAccSavingByClient(accountSaving);
+	    
+	}
+	
+	@PostMapping("/savingpersonalvip")
+	public Mono<AccountSaving> saveAccSavingByClientVIP(@RequestBody AccountSaving accountSaving){
+		log.info("*****Inicio: saveAccSavingByClientVIP*****");
+		return accountSavingService.saveAccSavingByClientVIP(accountSaving);
+	    
+	}
+	
+	@PostMapping("/empresarialpyme")
+	public Mono<AccountSaving> saveAccCurrentBussinessPyme(@RequestBody AccountSaving accountSaving){
+		log.info("*****Inicio: saveAccCurrentBussinessPyme*****");
+		return accountSavingService.saveAccCurrentBussinessPyme(accountSaving);
 	    
 	}
 }

@@ -19,7 +19,7 @@ public class AccountCreditController {
 	@Autowired
 	private IAccountCreditService accountCreditService;
 	
-	@PostMapping("/creditbyclient")
+	@PostMapping("/creditpersonal")
 	public Mono<AccountCredit> saveAccCreditByClient(@RequestBody AccountCredit accountCredit){
 		log.info("*****Inicio: saveAccSavingByClientPersonnel*****");
 		return accountCreditService.saveAccountCreditByClient(accountCredit);

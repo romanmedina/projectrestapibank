@@ -38,8 +38,8 @@ public class AccountCreditServiceImpl implements IAccountCreditService{
 	public Flux<AccountCredit> findAccCreditByClient(Integer idClient) {
 		return creditRepo.findAll().filter(x -> x.getIdClient().equals(idClient));
 	}
-
-	//Guardar un registro de cuenta de credito
+	
+	//Un cliente puede tener un producto de crédito sin la obligación de tener una cuenta bancaria en la institución.
 	@Override
 	public Mono<AccountCredit> create(AccountCredit Credit) {
 		return creditRepo.save(Credit);
@@ -53,18 +53,19 @@ public class AccountCreditServiceImpl implements IAccountCreditService{
 		return creditRepo.save(Credit);
 	}
 
+//	Personal: solo se permite un solo crédito por persona.
 	@Override
 	public Mono<AccountCredit> saveAccountCreditByClient(AccountCredit accountCredit) {
 		log.info("*****INICIO: Crear cuenta de credito por persona*****");
 		Flux<AccountCredit> getAccountCreditByClient = accountCredClient.getAccountCreditByClient(accountCredit.getIdClient());
 		Mono<Client> getClientById = clientRepo.findById(accountCredit.getIdClient());
-		if(getClientById.block().getTypeClient().equals(Constant.Personnel) && 
-				!getClientById.block().getTypeClient().equals(Constant.Bussiness)) {
+		if(getClientById.block().getTypeClient().equals(Constant.Personnel) || 
+				getClientById.block().getTypeClient().equals(Constant.Personnel_vip) || getClientById.block().getTypeClient().equals(Constant.Bussiness_pyme)) {
 			if(!(getAccountCreditByClient.count().block().longValue()>0)) {
-				log.info("**EXITO: Se creó la cuenta de crédito Personal**");
+				log.info("**EXITO: Se creó correctamente la cuenta de crédito Personal**");
 				return creditRepo.save(accountCredit);
 			}else {
-				log.info("**ERROR: Ya existe una cuenta personal para el cliente**");
+				log.info("**ERROR: Ya existe una cuenta de crédito personal para el cliente**");
 				return null;
 			}
 		}else {

@@ -3,12 +3,8 @@ package pe.com.restapibank.serviceimpl;
 import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import lombok.extern.slf4j.Slf4j;
 import pe.com.restapibank.entity.AccountSaving;
 import pe.com.restapibank.entity.Movement;
