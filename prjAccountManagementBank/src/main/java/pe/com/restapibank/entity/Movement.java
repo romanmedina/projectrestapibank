@@ -26,7 +26,8 @@ public class Movement {
     private Integer idFixed;
     private Integer idSaving;
     private LocalDateTime dateMovement;    
-    private String type;    
+    private String type;
+    private String description;
     private Double interest;    
     private Double balance;
 

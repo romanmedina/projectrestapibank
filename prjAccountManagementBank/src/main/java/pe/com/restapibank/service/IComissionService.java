@@ -12,4 +12,5 @@ public interface IComissionService {
 	Flux<Comission> findById(Integer id);
 	Mono<Comission> update(Comission comission);
 	Mono<Void> delete(Comission comission);
+	Flux<Comission> findByIdSaving(Integer id);
 }

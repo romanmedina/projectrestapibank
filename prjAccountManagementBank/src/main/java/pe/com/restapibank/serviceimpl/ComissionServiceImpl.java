@@ -40,4 +40,9 @@ public class ComissionServiceImpl implements IComissionService{
 		return comissionRepo.delete(comission);
 	}
 
+	@Override
+	public Flux<Comission> findByIdSaving(Integer id) {
+		return comissionRepo.findAll().filter(x -> x.getIdSaving().equals(id));
+	}
+	
 }

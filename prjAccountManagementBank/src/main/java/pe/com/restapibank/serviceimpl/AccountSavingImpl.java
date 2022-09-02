@@ -30,4 +30,9 @@ public class AccountSavingImpl implements IAccountSavingService{
 		return iIAccountSavingRepository.delete(account_saving);
 	}
 
+	@Override
+	public Flux<AccountSaving> findById(Integer id) {
+		return iIAccountSavingRepository.findAll().filter(x -> x.getIdSaving().equals(id));
+	}
+
 }

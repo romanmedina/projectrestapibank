@@ -20,7 +20,7 @@ public class AccountSaving {
 	private Double balance;
 	private Double interest;
 	private Integer idClient;
-	private Integer numberMovMax;
+	private Integer numberMovMonth;
 	
 	@Override
     public int hashCode() {
