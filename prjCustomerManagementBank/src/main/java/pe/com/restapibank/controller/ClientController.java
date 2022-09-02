@@ -30,7 +30,7 @@ public class ClientController {
 	public ResponseEntity<Flux<Client>> getAll(){
 		Flux<Client> getAll = clientService.getAll();
 		log.info("*************************************************************");
-		log.info("*****Inicio: Listar Persona*****");
+		log.info("*****Inicio: Listar Cliente*****");
 		log.info("*************************************************************");
 		return new ResponseEntity<Flux<Client>>(getAll,HttpStatus.OK);
 	}
@@ -43,7 +43,7 @@ public class ClientController {
     
 	@PostMapping
 	public ResponseEntity<Mono<Client>> create (@RequestBody Client client){
-		log.info("*****Inicio: Crear Persona*****");
+		log.info("*****Inicio: Crear Cliente*****");
 		log.info("*************************************************************");
 		Mono<Client> c = clientService.create(client);
 		return new ResponseEntity<Mono<Client>>(c, HttpStatus.CREATED);

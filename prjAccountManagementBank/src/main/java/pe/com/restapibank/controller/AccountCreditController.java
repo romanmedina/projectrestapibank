@@ -1,9 +1,5 @@
 package pe.com.restapibank.controller;
 
-import java.time.LocalDate;
-import java.util.Iterator;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,29 +10,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
-import pe.com.restapibank.entity.AccountSaving;
-import pe.com.restapibank.entity.Movement;
-import pe.com.restapibank.service.IAccountSavingService;
-import reactor.core.publisher.Flux;
+import pe.com.restapibank.entity.AccountCredit;
+import pe.com.restapibank.service.IAccountCreditService;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/account_saving")
+@RequestMapping("/account_credit")
 @Slf4j
-public class AccountSavingController {
+public class AccountCreditController {
 
 	@Autowired
-	private IAccountSavingService accountSavingService;
+	private IAccountCreditService accountCreditService;
 	
     @DeleteMapping("/delete")
-    public ResponseEntity<Mono<Void>> delete(@RequestBody AccountSaving account_saving ){
-    	Mono<Void> p = accountSavingService.delete(account_saving);
+    public ResponseEntity<Mono<Void>> delete(@RequestBody AccountCredit account_saving ){
+    	Mono<Void> p = accountCreditService.delete(account_saving);
         return new ResponseEntity<Mono<Void>>(p, HttpStatus.NO_CONTENT);
     }
     
 	@PostMapping
-	public Mono<AccountSaving> save(@RequestBody AccountSaving account_saving){
-		return accountSavingService.save(account_saving);
+	public Mono<AccountCredit> create(@RequestBody AccountCredit account_saving){
+		return accountCreditService.create(account_saving);
 	}
 	    
     

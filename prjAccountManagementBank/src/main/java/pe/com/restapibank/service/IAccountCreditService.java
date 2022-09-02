@@ -9,6 +9,7 @@ public interface IAccountCreditService {
 	Flux<AccountCredit> getAccountCredit();
 	Flux<AccountCredit> findAccCreditByClient(Integer idClient);
 	Mono<AccountCredit> create(AccountCredit fixed);
+	Mono<Void> delete(AccountCredit fixed);
 	Mono<AccountCredit> depositCredit(AccountCredit fixed);
 	
 }
