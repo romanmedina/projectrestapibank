@@ -3,8 +3,10 @@ package pe.com.restapibank.serviceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
+import pe.com.restapibank.entity.AccountCredit;
 import pe.com.restapibank.entity.AccountSaving;
 import pe.com.restapibank.entity.Client;
+import pe.com.restapibank.repository.IAccountCreditRepository;
 import pe.com.restapibank.repository.IAccountSavingRepository;
 import pe.com.restapibank.repository.IClientRepository;
 import pe.com.restapibank.service.IAccountSavingClientService;
@@ -23,6 +25,9 @@ public class AccountSavingClientImpl implements IAccountSavingClientService{
 
 	@Autowired
 	private IAccountSavingRepository iIAccountSavingRepository;
+	
+	@Autowired 
+	private IAccountCreditRepository iAccountCreditRepo;
 
 	@Override
 	public Flux<Client> getByIdClient(Integer idClient) {
@@ -32,13 +37,7 @@ public class AccountSavingClientImpl implements IAccountSavingClientService{
 		return iClientRepository.findAll()
 				.filter(xmg_client-> xmg_client.getIdClient().equals(idClient));		
 	}
-	
-	@Override
-	public Flux<AccountSaving> getByIdClientAccount(Integer idClient) {
-		return iIAccountSavingRepository.findAll()
-				.filter(xmg_account_saving-> xmg_account_saving.getIdClient().equals(idClient));
-	}
-	
+		
 	@Override
 	public Mono<AccountSaving> save(AccountSaving account_saving) {
 		
@@ -68,13 +67,18 @@ public class AccountSavingClientImpl implements IAccountSavingClientService{
 		//return null;
 	}
 
-
-
-
-
-
-
-
+	//Obtiene la cuenta de ahorro por cliente
+	@Override
+	public Flux<AccountSaving> getAccountSavingByClient(Integer idClient) {
+		return iIAccountSavingRepository.findAll()
+				.filter(xmg_account_saving-> xmg_account_saving.getIdClient().equals(idClient));
+	}
+	
+	//Obtiene la cuenta de credito por cliente
+	@Override
+	public Flux<AccountCredit> getAccountCreditByClient(Integer idClient) {
+		return iAccountCreditRepo.findAll().filter(x -> x.getIdClient().equals(idClient));
+	}
 
 	
 }

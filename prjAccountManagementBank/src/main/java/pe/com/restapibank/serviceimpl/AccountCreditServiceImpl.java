@@ -3,17 +3,29 @@ package pe.com.restapibank.serviceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.log4j.Log4j2;
 import pe.com.restapibank.entity.AccountCredit;
+import pe.com.restapibank.entity.Client;
 import pe.com.restapibank.repository.IAccountCreditRepository;
+import pe.com.restapibank.repository.IClientRepository;
 import pe.com.restapibank.service.IAccountCreditService;
+import pe.com.restapibank.service.IAccountSavingClientService;
+import pe.com.restapibank.utils.Constant;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
+@Log4j2
 public class AccountCreditServiceImpl implements IAccountCreditService{
 
 	@Autowired
 	IAccountCreditRepository creditRepo;
+	
+	@Autowired
+	IClientRepository clientRepo;
+	
+	@Autowired
+	IAccountSavingClientService accountCredClient;
 	
 	//Obtiene todas las cuentas de credito
 	@Override
@@ -39,6 +51,27 @@ public class AccountCreditServiceImpl implements IAccountCreditService{
 	public Mono<AccountCredit> depositCredit(AccountCredit Credit) {
 		// TODO Auto-generated method stub
 		return creditRepo.save(Credit);
+	}
+
+	@Override
+	public Mono<AccountCredit> saveAccountCreditByClient(AccountCredit accountCredit) {
+		log.info("*****INICIO: Crear cuenta de credito por persona*****");
+		Flux<AccountCredit> getAccountCreditByClient = accountCredClient.getAccountCreditByClient(accountCredit.getIdClient());
+		Mono<Client> getClientById = clientRepo.findById(accountCredit.getIdClient());
+		if(getClientById.block().getTypeClient().equals(Constant.Personnel) && 
+				!getClientById.block().getTypeClient().equals(Constant.Bussiness)) {
+			if(!(getAccountCreditByClient.count().block().longValue()>0)) {
+				log.info("**EXITO: Se creó la cuenta de crédito Personal**");
+				return creditRepo.save(accountCredit);
+			}else {
+				log.info("**ERROR: Ya existe una cuenta personal para el cliente**");
+				return null;
+			}
+		}else {
+			log.info("**ERROR: El cliente no es de tipo Personal**");
+			return null;
+		}
+
 	}
 
 }

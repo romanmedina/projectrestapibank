@@ -68,7 +68,7 @@ public class GenerateMovementController {
 	@GetMapping("movementclient/{idClient}")
     public ResponseEntity<Flux<Movement>> findByIdProductBankClient(@PathVariable Integer idClient){
     	// Ahorros
-    	Flux<AccountSaving> objFluxaccountSavingClient = accountSavingClientService.getByIdClientAccount(idClient);
+    	Flux<AccountSaving> objFluxaccountSavingClient = accountSavingClientService.getAccountSavingByClient(idClient);
     	List<AccountSaving> listAccountSavingClient = objFluxaccountSavingClient.collectList().block();
 		Flux<Movement> objFluxAccountMovement = null;
     	List<Movement> listMovementClient = null;
