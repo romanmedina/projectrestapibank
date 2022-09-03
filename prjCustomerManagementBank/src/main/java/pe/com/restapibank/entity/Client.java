@@ -1,10 +1,17 @@
 package pe.com.restapibank.entity;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Document(collection = "client")
 public class Client {
 
@@ -14,7 +21,7 @@ public class Client {
 	private String dateEntry;
 	private String userCreation;
 	private String ipCreation;
-	private Integer idPerson;
+	private Person person;
 
 	@Override
     public int hashCode() {

@@ -1,7 +1,6 @@
 package pe.com.restapibank.entity;
 
 import java.time.LocalDateTime;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Data;
@@ -16,7 +15,7 @@ public class Client {
 	private LocalDateTime dateEntry;
 	private String userCreation;
 	private String ipCreation;
-	private Integer idPerson;
+	private Person person;
 	
 	@Override
     public int hashCode() {
