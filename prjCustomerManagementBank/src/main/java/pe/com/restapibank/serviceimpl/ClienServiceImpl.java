@@ -59,23 +59,24 @@ public class ClienServiceImpl implements IClientService{
 
 	@Override
 	public Mono<Client> getClientById(Integer id) {
-		Person person = new Person();
-		Mono<Person> personByClient = this.webClient.get().uri("/person/{id}", id).retrieve().bodyToMono(Person.class);
-		return personByClient.flatMap(x ->{
-			person.setIdPerson(x.getIdPerson());
-			person.setFullName(x.getFullName());
-			person.setTypeDoc(x.getTypeDoc());
-			person.setNumberDoc(x.getNumberDoc());
-			person.setDateBirth(x.getDateBirth());
-			person.setEmail(x.getEmail());
-			person.setPhone(x.getPhone());
-			person.setActive(x.getActive());
-			person.setUserCreation(x.getUserCreation());
-			person.setIpCreation(x.getIpCreation());
-			
-			Mono<Client> client = Mono.just(new Client(10,"Personal","2022-08-30T12:26:30.107","ROM01","10.21.12.122",person));
-			return client;
-		});
+		return null;
+//		Person person = new Person();
+//		Mono<Person> personByClient = this.webClient.get().uri("/person/{id}", id).retrieve().bodyToMono(Person.class);
+//		return personByClient.flatMap(x ->{
+//			person.setIdPerson(x.getIdPerson());
+//			person.setFullName(x.getFullName());
+//			person.setTypeDoc(x.getTypeDoc());
+//			person.setNumberDoc(x.getNumberDoc());
+//			person.setDateBirth(x.getDateBirth());
+//			person.setEmail(x.getEmail());
+//			person.setPhone(x.getPhone());
+//			person.setActive(x.getActive());
+//			person.setUserCreation(x.getUserCreation());
+//			person.setIpCreation(x.getIpCreation());
+//			
+//			Mono<Client> client = Mono.just(new Client(10,"Personal","2022-08-30T12:26:30.107","ROM01","10.21.12.122",person));
+//			return client;
+//		});
 	}	
 	
 	@Override

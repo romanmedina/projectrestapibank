@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 import pe.com.restapibank.entity.AccountCredit;
+import pe.com.restapibank.entity.AccountFixed;
 import pe.com.restapibank.entity.AccountSaving;
 import pe.com.restapibank.entity.Client;
 import pe.com.restapibank.repository.IAccountCreditRepository;
+import pe.com.restapibank.repository.IAccountFixedRepository;
 import pe.com.restapibank.repository.IAccountSavingRepository;
 import pe.com.restapibank.repository.IClientRepository;
 import pe.com.restapibank.service.IAccountSavingClientService;
@@ -28,6 +30,9 @@ public class AccountSavingClientImpl implements IAccountSavingClientService{
 	
 	@Autowired 
 	private IAccountCreditRepository iAccountCreditRepo;
+	
+	@Autowired 
+	private IAccountFixedRepository iAccountFixedRepo;
 
 	@Override
 	public Flux<Client> getByIdClient(Integer idClient) {
@@ -78,6 +83,11 @@ public class AccountSavingClientImpl implements IAccountSavingClientService{
 	@Override
 	public Flux<AccountCredit> getAccountCreditByClient(Integer idClient) {
 		return iAccountCreditRepo.findAll().filter(x -> x.getIdClient().equals(idClient));
+	}
+
+	@Override
+	public Flux<AccountFixed> getAccountFixedByClient(Integer idClient) {
+		return iAccountFixedRepo.findAll().filter(x -> x.getIdClient().equals(idClient));
 	}
 
 	

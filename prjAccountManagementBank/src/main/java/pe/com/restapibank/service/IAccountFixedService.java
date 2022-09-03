@@ -12,4 +12,6 @@ public interface IAccountFixedService {
 	Mono<AccountFixed> depositFixed(AccountFixed fixed);
 	Mono<AccountFixed> retreatFixed(AccountFixed fixed);
 	
+	//
+	Mono<AccountFixed> saveAccountFixedByClient(AccountFixed accountFixed);
 }

@@ -17,7 +17,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/fixed")
+@RequestMapping("/account_fixed")
 @Log4j2
 public class AccountFixedController {
 
@@ -56,6 +56,13 @@ public class AccountFixedController {
 		log.info("*************************************************************");
 		Mono<AccountFixed> a = fixedService.depositFixed(fixed);
 		return new ResponseEntity<Mono<AccountFixed>>(a, HttpStatus.CREATED);
+	}
+	
+	//
+	@PostMapping("/fixedpersonal")
+	public Mono<AccountFixed> saveAccCreditByClient(@RequestBody AccountFixed accountFixed){
+		log.info("*****Inicio: saveAccCreditByClient*****");
+		return fixedService.saveAccountFixedByClient(accountFixed);
 	}
 	
 	

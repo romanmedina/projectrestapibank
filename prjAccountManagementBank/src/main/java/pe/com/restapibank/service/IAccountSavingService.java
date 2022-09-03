@@ -14,4 +14,6 @@ public interface IAccountSavingService {
 	Mono<AccountSaving> saveAccSavingByClient(AccountSaving accountSaving);
 	Mono<AccountSaving> depositFixed(AccountSaving accountSaving);
 	Mono<AccountSaving> retreatFixed(AccountSaving accountSaving);	
+	Mono<AccountSaving> saveAccSavingByClientVIP(AccountSaving accountSaving);
+	Mono<AccountSaving> saveAccCurrentBussinessPyme(AccountSaving accountSaving);
 }
