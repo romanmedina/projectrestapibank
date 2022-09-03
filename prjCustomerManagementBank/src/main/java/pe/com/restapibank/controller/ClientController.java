@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.extern.log4j.Log4j2;
 import pe.com.restapibank.entity.Client;
+import pe.com.restapibank.entity.ClientResilence;
 import pe.com.restapibank.entity.Person;
 import pe.com.restapibank.service.IClientService;
 import reactor.core.publisher.Flux;
@@ -57,7 +58,7 @@ public class ClientController {
 	
 	@GetMapping("/{id}")
 	@CircuitBreaker(name = "person", fallbackMethod = "fallBackGetClientByid")
-	public Mono<Client> getClientById(@PathVariable Integer id){
+	public Mono<ClientResilence> getClientById(@PathVariable Integer id){
 		return clientService.getClientById(id);
 	}
 	

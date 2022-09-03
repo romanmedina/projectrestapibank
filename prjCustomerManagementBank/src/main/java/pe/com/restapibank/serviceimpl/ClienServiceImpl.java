@@ -6,6 +6,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import lombok.extern.slf4j.Slf4j;
 import pe.com.restapibank.entity.Client;
+import pe.com.restapibank.entity.ClientResilence;
 import pe.com.restapibank.entity.Person;
 import pe.com.restapibank.repository.IClientRepository;
 import pe.com.restapibank.service.IClientService;
@@ -58,7 +59,7 @@ public class ClienServiceImpl implements IClientService{
 	}
 
 	@Override
-	public Mono<Client> getClientById(Integer id) {
+	public Mono<ClientResilence> getClientById(Integer id) {
 		Person person = new Person();
 		Mono<Person> personByClient = this.webClient.get().uri("/person/{id}", id).retrieve().bodyToMono(Person.class);
 		return personByClient.flatMap(x ->{
@@ -73,8 +74,8 @@ public class ClienServiceImpl implements IClientService{
 			person.setUserCreation(x.getUserCreation());
 			person.setIpCreation(x.getIpCreation());
 			
-			Mono<Client> client = Mono.just(new Client(10,"Personal","2022-08-30T12:26:30.107","ROM01","10.21.12.122",person));
-			return client;
+			Mono<ClientResilence> clientResilence = Mono.just(new ClientResilence(10,"Personal","2022-08-30T12:26:30.107","ROM01","10.21.12.122",person));
+			return clientResilence;
 		});
 	}	
 	

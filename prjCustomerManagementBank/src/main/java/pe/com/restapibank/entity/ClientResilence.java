@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection = "client")
-public class Client {
+public class ClientResilence {
 
 	@Id
 	private Integer idClient;
@@ -18,7 +18,7 @@ public class Client {
 	private String dateEntry;
 	private String userCreation;
 	private String ipCreation;
-	private Integer idPerson;
+	private Person person;
 
 	@Override
     public int hashCode() {
@@ -36,7 +36,7 @@ public class Client {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Client other = (Client) obj;
+        ClientResilence other = (ClientResilence) obj;
         if (idClient == null) {
             if (other.idClient != null)
                 return false;
